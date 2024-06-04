@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 @Data
@@ -35,11 +36,12 @@ public class FareCalculator {
         Predicate<Rule> rulePredicate = rule -> rule.isRuleSatisfied(journey);
 
         // Figure out which rule will be applicable out of all provided business rules
+
         Rule applicableRule = travelStrategy.getRuleCollection().getRules()
                 .stream()
                 .filter(rulePredicate)
                 .min(ruleComparator)
-                .get();
+                .orElseThrow(() -> new NoSuchElementException("No applicable rule found"));
 
         //finally, return the chargeable fare
         return applicableRule.getChargeableFare();

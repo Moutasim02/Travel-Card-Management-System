@@ -15,10 +15,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(scanBasePackages = {"com.demo.travelcardsystem"})
-public class TravelcardsystemApplication{
+public class TravelCardSystemApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TravelcardsystemApplication.class, args);
+        SpringApplication.run(TravelCardSystemApplication.class, args);
     }
 
     @Bean

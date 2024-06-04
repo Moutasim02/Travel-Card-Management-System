@@ -19,7 +19,7 @@ public class TravelStrategy {
     @NonNull
     private RuleCollection ruleCollection;
 
-    public Consumer<Double> anyWhereInZoneOneStrategy = chargeableAmount -> {
+    protected Consumer<Double> anyWhereInZoneOneStrategy = chargeableAmount -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
 
@@ -28,10 +28,9 @@ public class TravelStrategy {
         rule.addZonePair(zonePair);
 
         ruleCollection.addRules(rule);
-
     };
 
-    public Consumer<Double> anyOneZoneOutsideZoneOneStrategy = chargeableAmount -> {
+    protected Consumer<Double> anyOneZoneOutsideZoneOneStrategy = chargeableAmount -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
 
@@ -42,7 +41,7 @@ public class TravelStrategy {
         ruleCollection.addRules(rule);
     };
 
-    public Consumer<Double> anyTwoZoneIncludingZoneOneStrategy = chargeableAmount -> {
+    protected Consumer<Double> anyTwoZoneIncludingZoneOneStrategy = chargeableAmount -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
 
@@ -55,7 +54,7 @@ public class TravelStrategy {
         ruleCollection.addRules(rule);
     };
 
-    public  Consumer<Double> anyTwoZoneExcludingZoneOneStrategy = chargeableAmount -> {
+    protected Consumer<Double> anyTwoZoneExcludingZoneOneStrategy = chargeableAmount -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
 
@@ -66,34 +65,28 @@ public class TravelStrategy {
         ruleCollection.addRules(rule);
     };
 
-    public Consumer<Double> anyThreeZoneStrategy = chargeableAmount -> {
+    protected Consumer<Double> anyThreeZoneStrategy = chargeableAmount -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
-
-
-
         ruleCollection.addRules(rule);
     };
 
-    public BiConsumer<Double, TransportType> anyJourneyByBus = (chargeableAmount, transType) -> {
+    protected BiConsumer<Double, TransportType> anyJourneyByBus = (chargeableAmount, transType) -> {
         Rule rule = new Rule();
         rule.setChargeableFare(chargeableAmount);
         rule.setTransportType(transType);
-
         ruleCollection.addRules(rule);
-
-
     };
 
     public RuleCollection loadAllBusinessRules() {
-        anyWhereInZoneOneStrategy.accept(2.50);
-        anyOneZoneOutsideZoneOneStrategy.accept(2.00);
-        anyTwoZoneIncludingZoneOneStrategy.accept(3.00);
-        anyTwoZoneExcludingZoneOneStrategy.accept(2.25);
-        anyThreeZoneStrategy.accept(3.20);
-        anyJourneyByBus.accept(1.80, TransportType.BUS);
+        anyWhereInZoneOneStrategy.accept(3.91);
+        anyOneZoneOutsideZoneOneStrategy.accept(3.13);
+        anyTwoZoneIncludingZoneOneStrategy.accept(4.69);
+        anyTwoZoneExcludingZoneOneStrategy.accept(3.52);
+        anyThreeZoneStrategy.accept(5.00);
+        anyJourneyByBus.accept(2.81, TransportType.BUS);
 
-        this.ruleCollection.setMaxFare(3.20);
+        this.ruleCollection.setMaxFare(5.00);
 
         return this.ruleCollection;
     }

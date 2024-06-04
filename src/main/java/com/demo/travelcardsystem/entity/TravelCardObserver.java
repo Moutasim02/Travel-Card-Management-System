@@ -16,16 +16,15 @@ public class TravelCardObserver implements Observer<TravelCard>{
 
     @Override
     public void reactOnChange(TravelCard travelCard) {
-        TravelCard card = travelCard;
         Journey journey =  travelCard.getCurrentJourney();
 
         //When journey is completed then add max charge back and debit chargeable fare
         if(journey.isJourneyCompleted()) {
-            card.addCredit(fareCalculator.getTravelStrategy().getRuleCollection().getMaxFare());
-            debitChargeableFare(card);
+            travelCard.addCredit(fareCalculator.getTravelStrategy().getRuleCollection().getMaxFare());
+            debitChargeableFare(travelCard);
         } else {
             // If journey starts the charge max amount
-            card.debitAmount(fareCalculator.getTravelStrategy().getRuleCollection().getMaxFare());
+            travelCard.debitAmount(fareCalculator.getTravelStrategy().getRuleCollection().getMaxFare());
         }
     }
 

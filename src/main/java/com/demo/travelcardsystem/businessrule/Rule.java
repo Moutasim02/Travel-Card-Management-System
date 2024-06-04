@@ -23,5 +23,4 @@ public class Rule {
                 || (journey.getTransportType().equals(this.getTransportType()) && zonePairSet.isEmpty());
     }
 
-
 }

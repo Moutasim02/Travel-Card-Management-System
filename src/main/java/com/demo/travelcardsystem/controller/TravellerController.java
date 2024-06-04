@@ -1,5 +1,7 @@
 package com.demo.travelcardsystem.controller;
 
+import com.demo.travelcardsystem.config.TravelCardSystemApplication;
+import com.demo.travelcardsystem.entity.Station;
 import com.demo.travelcardsystem.model.request.CardRegistrationRequest;
 import com.demo.travelcardsystem.model.request.SwipeRequest;
 import com.demo.travelcardsystem.model.response.TravelCardResponse;
@@ -8,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/card")
@@ -25,6 +28,11 @@ public class TravellerController {
     @PostMapping(value = "/register")
     public void registerNewUser(@RequestBody CardRegistrationRequest cardRegistrationRequest) {
         travellerService.registerNewCard(cardRegistrationRequest);
+    }
+
+    @GetMapping(value = "/stations")
+    public Set<Station> getStation() {
+        return TravelCardSystemApplication.getStations();
     }
 
     @PostMapping(value = "/recharge/{rechargeAmount}")
